@@ -1,0 +1,81 @@
+﻿@model ClienteModel
+@{
+    ViewData["Title"] = "Cadastro Cliente";
+}
+<div class="text-center">
+
+    <h1 class=display-4>Cadastro Cliente</h1>
+    <br />
+</div>
+
+<form asp-controller="Cliente" asp-action="Criar" method="post">
+    <fieldset>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label for="nome">Nome</label>
+                <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do cliente.">
+                @Html.ValidationMessageFor(x => x.Nome)
+            </div>
+
+            <div class="col-sm-3">
+                @Html.LabelFor(x => x.CPF, "CPF", new { @class="form-label" })
+                @Html.TextBoxFor(x => x.CPF, new { @class="form-control", @onkeydown="return /[^a-z]/g.test(event.key)", @placeholder="123.456.789-10"})
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(x => x.DataNascimento, "Data de Nascimento", new { @class="form-label" })
+                @Html.TextBoxFor(x => x.DataNascimento, new { @class="form-control", @maxlength="35", @type="date", @max="2099-12-31"})
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label for="nome">Endereço</label>
+                <input type="text" asp-for="Endereco" class="form-control" placeholder="Digite o endereço do cliente.">
+                @Html.ValidationMessageFor(x => x.Endereco)
+            </div>
+
+            <div class="col-sm-3">
+                <label class="col-form-label">Estado</label>
+                @Html.DropDownListFor(model => model.IdEstado, new SelectList(ViewBag.Estados, "Value", "Text"), new { @class = "form-control isSelect", @data_input = "" })
+            </div>
+
+            <div class="col-md-3">
+                <label class="col-form-label">Cidade</label>
+                @Html.DropDownListFor(model => model.IdCidade, new SelectList(ViewBag.Cidades, "Value", "Text"), new { @class = "form-control isSelect", @data_input = "" })
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                Sexo
+                <div class="row">
+                    <p class="col-md-6">
+                        @Html.RadioButtonFor(model => model.Sexo, "Masculino")
+                        <label>Masculino</label>
+                    </p>
+                    <p class="col-md-6">
+                        @Html.RadioButtonFor(model => model.Sexo, "Feminino")
+                        <label>Feminino</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="btn-center">
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-secondary" asp-controller="Cliente" asp-action="Index" role="button">Voltar</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery-mask-plugin/dist/jquery.mask.js"></script>
+<script src="~/lib/jquery-mask-plugin/dist/jquery.mask.min.js"></script>

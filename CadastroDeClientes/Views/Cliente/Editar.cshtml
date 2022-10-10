@@ -1,0 +1,79 @@
+﻿@model ClienteModel
+@{
+    ViewData["Title"] = "Edição Cliente";
+}
+<div class="text-center">
+
+    <h1 class=display-4>Edição Cliente</h1>
+    </br>
+</div>
+
+<form asp-controller="Cliente" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <label for="nome">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do cliente.">
+            @Html.ValidationMessageFor(x => x.Nome)
+        </div>
+
+        <div class="col-sm-3">
+            <label for="nome">CPF</label>
+            <input type="text" asp-for="CPF" class="form-control" placeholder="Digite o CPF do cliente." data_mask="000.000.000-00">
+            @Html.ValidationMessageFor(a => a.CPF)
+        </div>
+
+        <div class="col-md-3">
+            <label for="nome">Data de Nascimento</label>
+            <input type="text" asp-for="DataNascimento" class="form-control" placeholder="Digite a data de nascimento do cliente.">
+            @Html.ValidationMessageFor(x => x.DataNascimento)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+
+        <div class="col-sm-6">
+            <label for="nome">Endereço</label>
+            <input type="text" asp-for="Endereco" class="form-control" placeholder="Digite o endereço do cliente.">
+            @Html.ValidationMessageFor(x => x.Endereco)
+        </div>
+
+        <div class="col-sm-3">
+            <label class="col-form-label">Estado</label>
+            @Html.DropDownListFor(model => model.IdEstado, new SelectList(ViewBag.Estados, "Value", "Text"), new { @class = "form-control isSelect", @data_input = "" })
+        </div>
+
+        <div class="col-md-3">
+            <label class="col-form-label">Cidade</label>
+            @Html.DropDownListFor(model => model.IdCidade, new SelectList(ViewBag.Cidades, "Value", "Text"), new { @class = "form-control isSelect", @data_input = "" })
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            Sexo
+            <div class="row">
+                <p class="col-md-6">
+                    @Html.RadioButtonFor(model => model.Sexo, "Masculino")
+                    <label>Masculino</label>
+                </p>
+                <p class="col-md-6">
+                    @Html.RadioButtonFor(model => model.Sexo, "Feminino")
+                    <label>Feminino</label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="btn-center">
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Alterar</button>
+        </div>
+        <div class="col-sm-2">
+            <a class="btn btn-secondary" asp-controller="Cliente" asp-action="Index" role="button">Voltar</a>
+        </div>
+    </div>
+</form>

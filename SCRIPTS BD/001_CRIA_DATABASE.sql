@@ -1,0 +1,5 @@
+--CRIAR A DATABASE 
+
+CREATE DATABASE DB_SistemaClientes
+
+
